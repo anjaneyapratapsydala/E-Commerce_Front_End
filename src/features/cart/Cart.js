@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import {
   deleteItemFromCartAsync,
   updateCartAsync,
@@ -29,7 +30,8 @@ export  default function Cart() {
   }
   return (
     <>
-   
+    {!items.length &&  <Navigate to='/' replace={true}></Navigate>}
+   <div>
     <div className="mx-auto mt-4 bg-white max-w-3xl px-4 sm:px-6 lg:px-8">
     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
       <h1 className='text-4xl mb-5 mt-0 font-bold tracking-tight text-gray-900'>Cart</h1>
@@ -125,7 +127,8 @@ export  default function Cart() {
     </p>
   </div>
 </div>
-</div>
+   </div>
+   </div>
 </>
   );
 }

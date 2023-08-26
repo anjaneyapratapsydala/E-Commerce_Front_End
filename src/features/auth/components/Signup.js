@@ -28,9 +28,8 @@ export  default function Signup() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form noValidate className="space-y-6" onSubmit={handleSubmit((data)=>{
-            //  console.log(data)  
-             dispatch(createUserAsync({email:data.email,password:data.password}))
+        <form noValidate className="space-y-6" onSubmit={handleSubmit((data)=>{ 
+             dispatch(createUserAsync({email:data.email,password:data.password,addresses:[]}))
         })}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
