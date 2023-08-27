@@ -10,32 +10,10 @@ import { updateCartAsync } from '../features/cart/CartSlice'
 import { useDispatch } from 'react-redux'
 import { useForm } from "react-hook-form";
 import { selectLoggedInUser, updateUserAsync } from '../features/auth/authSlice'
-import { createOrderAsync } from '../features/order/orderSlice'
+import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice'
+import { selectUserInfo } from '../features/user/userSlice'
 
-const products = [
-    {
-      id: 1,
-      name: 'Throwback Hip Bag',
-      href: '#',
-      color: 'Salmon',
-      price: '$90.00',
-      quantity: 1,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-      imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-    },
-    {
-      id: 2,
-      name: 'Medium Stuff Satchel',
-      href: '#',
-      color: 'Blue',
-      price: '$32.00',
-      quantity: 1,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-      imageAlt:
-        'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-    },
-    // More products...
-  ]
+
   
   export default function Checkout() {
     const items = useSelector(selectItems);
@@ -44,7 +22,7 @@ const products = [
       reset,
       formState: { errors } } = useForm();
       const [open, setOpen] = useState(true)
-      const user = useSelector(selectLoggedInUser);
+      const user = useSelector(selectUserInfo);
       console.log(user.target)
      const dispatch = useDispatch()
      const totalAmount = items.reduce((amount,item)=>item.price*item.quantity + amount,0)
@@ -66,13 +44,23 @@ const products = [
      const handlePayment = (e)=>{
         setPaymentMethod(e.target.value);
      }
+     const currentOrder = useSelector(selectCurrentOrder)
+
      const handleOrder = (e)=>{
-      const order = {items,totalAmount,totalItems,user,paymentMethod,selectedAddress}
+      const order = {items,
+        totalAmount,
+        totalItems,
+        user,
+        paymentMethod,
+        selectedAddress,
+        status:'pending'
+      }
       dispatch(createOrderAsync(order))
    }  
   return (
     <>
     {!items.length &&  <Navigate to='/' replace={true}></Navigate>}
+    {currentOrder &&  <Navigate to={`/ordersuccess/${currentOrder.id}`} replace={true}></Navigate>}
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="grid grid-cols-1 gap-x-8  mt-10 gap-y-10 lg:grid-cols-5">
         <div className='lg:col-span-3'>
@@ -208,7 +196,8 @@ const products = [
         </button>
       </div>
         <div className="border-b px-5 border-gray-900/10">
-          <h2 className="text-base font-semibold  leading-7 text-gray-900">Address</h2>
+          <h2 className="text-base font-semibold  leading-7 text-gray-900">
+            Address</h2>
           <p className="mt-2 text-sm leading-6 text-gray-600">
           Choose From Existing Addresses
           </p>
@@ -276,8 +265,6 @@ const products = [
           </div>
         </div>
       </div>
-
-  
     </form>
     </div>
    
