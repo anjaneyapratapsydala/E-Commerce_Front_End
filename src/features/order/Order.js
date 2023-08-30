@@ -7,9 +7,6 @@ export  default function Order() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
  
-
-
-
   return (
    <div>
     <div>
