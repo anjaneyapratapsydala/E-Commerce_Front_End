@@ -52,10 +52,10 @@ export function fetchProductsByFilters(filter,sort,pagination) {
     }
   }
   for(let key in sort){
-     queryString+=`${key}=${sort[key]}`
+     queryString+=`${key}=${sort[key]}&`
   }
   for(let key in pagination){
-    queryString+=`${key}=${pagination[key]}`
+    queryString+=`${key}=${pagination[key]}&`
  }
   return new Promise(async(resolve) =>{
      const response = await fetch('http://localhost:8080/products?'+queryString)

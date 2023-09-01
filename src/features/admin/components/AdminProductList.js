@@ -7,7 +7,7 @@ import { ChevronLeftIcon, ChevronRightIcon ,StarIcon} from '@heroicons/react/20/
 //   incrementAsync
 //   // selectCount,
 // } from '../productSlice';
-import { ITEMS_PER_PAGE } from '../../../app/constants';
+import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/constants';
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
@@ -455,7 +455,7 @@ function ProductGrid({products,filters}) {
                     </p>
                 </div>
                 <div>
-                <p className="text-sm font-medium block text-gray-900">${Math.round(product.price*(1-product.discountPercentage/100))}</p>
+                <p className="text-sm font-medium block text-gray-900">${discountedPrice(product)}</p>
                 <p className="text-sm font-medium block text-gray-500 line-through">${product.price}</p>
                 </div>
               </div>

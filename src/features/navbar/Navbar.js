@@ -9,9 +9,10 @@ import { selectLoggedInUser } from '../auth/authSlice'
 import { UseSelector } from 'react-redux/es/hooks/useSelector'
 
 const navigation = [
-  { name: 'Dashboard', link: '#', user: true },
-  { name: 'Team', link: '#', user: false },
-  { name: 'Admin', link: '/admin',admin:true },
+  { name: 'Home', link: '/', user: true },
+  // { name: 'Team', link: '#', user: false },
+  { name: 'Products', link: '/admin',admin:true },
+  { name: 'Orders', link: '/admin/orders',admin:true },
 ]
 const userNavigation = [
   { name: 'My Profile', link: '/profile' },
@@ -34,7 +35,7 @@ export default function Navbar({children}) {
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
+                <div className="flex h-12 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                      { <Link to="/">
@@ -198,12 +199,12 @@ export default function Navbar({children}) {
         </Disclosure>
 
         <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900">Wayne Store</h1>
           </div>
         </header>
         <main>
-          <div className="mx-auto max-w-7xl py-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-8xl py-2 sm:px-3 lg:px-6">
             {children}
             </div>
         </main>
