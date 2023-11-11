@@ -43,7 +43,8 @@ export function fetchProductById(id) {
 
 export function fetchProductsByFilters(filter,sort,pagination) {
    //filter object 
-   let queryString="";
+
+  let queryString="";
   for(let key in filter){
     const categoryValues = filter[key]
     if(categoryValues.length){
